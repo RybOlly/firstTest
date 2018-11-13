@@ -30,13 +30,14 @@ public class App
                     return driver.findElement(By.id("blended_searchbox")).findElement(By.className("name"));
                 }
             });
+
             List<String> names = driver.findElement(By.id("blended_searchbox"))
                     .findElements(By.className("name"))
                     .stream()
                     .map(WebElement::getText)
                     .collect(Collectors.toList());
             //System.out.println(names);
-            driver.quit();
+            //driver.quit();
             if (!names.contains("Los Angeles (LAX)")) {
                 throw new NoSuchElementException("Don't work");
             }
