@@ -27,35 +27,27 @@ public class TS
                     .withTimeout(Duration.ofSeconds(5))
                     .pollingEvery(Duration.ofSeconds(1))
                     .ignoring(NoSuchElementException.class);
-            wait.until(new Function<WebDriver, WebElement>() {
+            WebElement name = wait.until(new Function<WebDriver, WebElement>() {
                 public WebElement apply(WebDriver driver) {
                     return driver.findElement(By.id("blended_searchbox")).findElement(By.className("name"));
                 }
             });
+            name.click();
 
-            List<String> names = driver.findElement(By.id("blended_searchbox"))
-                    .findElements(By.className("name"))
-                    .stream()
-                    .map(WebElement::getText)
-                    .collect(Collectors.toList());
-            //System.out.println(names);
-            //driver.quit();
-            driver.findElement(By.id("blended_searchbox")).findElement(By.className("name")).click();
-
-
-            if (!names.contains("Los Angeles (LAX)")) {
-                throw new NoSuchElementException("Don't work!");
-            }
             driver.findElement(By.id("blended_searchbox")).findElement(By.name("checkindate")).click();
-            Thread.sleep(5000);
+            Thread.sleep(1000);
 
-            driver.findElement(By.id("blended_searchbox"))
+            driver.findElement(By.className("month-wrapper"))
                     .findElement(By.className("month2"))
-                    .findElement(By.className("day-toMonth")).findElement(By.xpath(".//*")).click();
-            System.out.println("dds");
-            System.out.println(driver.findElement(By.id("blended_searchbox"))
+                    .findElement(By.className("toMonth")).click();
+
+            driver.findElement(By.id("blended_searchbox")).findElement(By.name("checkoutdate")).click();
+            List<WebElement> list = driver.findElement(By.className("month-wrapper"))
                     .findElement(By.className("month2"))
-                    .findElement(By.className("day-toMonth")).findElement(By.xpath(".//*")));
+                    .findElements(By.className("toMonth"));
+
+            list.get(list.size() - 1).click();
+
 
 
         } catch (NoSuchElementException e) {
