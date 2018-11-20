@@ -55,10 +55,13 @@ public class TS
 
             driver.findElement(By.id("search_list_section")).findElement(By.className("lot")).findElement(By.className("btn-p-2")).click();
 
-            ArrayList tabs = new ArrayList (driver.getWindowHandles());
-            driver.switchTo().window(tabs.get(1));
+            wait.until(new Function<WebDriver, WebElement>() {
+                public WebElement apply(WebDriver driver) {
+                    return driver.findElement(By.id("dates-component"));
+                }
+            });
 
-            driver.findElement(By.id("dates-component")).findElement(By.xpath("//button[@type='submit']")).click();
+            driver.findElement(By.id("dates-component")).findElement(By.className("vwo-click-modal-times")).click();
         }
         catch (NoSuchElementException e) {
         System.out.println("Don't work");
