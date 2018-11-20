@@ -1,19 +1,16 @@
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import java.util.stream.Collectors;
-import java.util.List;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
-import java.util.function.Function;
 import java.time.Duration;
+import java.util.List;
+import java.util.function.Function;
 
 
-
-
-public class TS
+public class TST
 {
     public static void main(String[] args) throws InterruptedException
     {
@@ -53,18 +50,13 @@ public class TS
                 }
             });
 
-            driver.findElement(By.id("search_list_section")).findElement(By.className("lot")).findElement(By.className("btn-p-2")).click();
-
-            ArrayList tabs = new ArrayList (driver.getWindowHandles());
-            driver.switchTo().window(tabs.get(1));
-
-            driver.findElement(By.id("dates-component")).findElement(By.xpath("//button[@type='submit']")).click();
-        }
-        catch (NoSuchElementException e) {
-        System.out.println("Don't work");
-        }// finally {
-          //  Thread.sleep(2000);
-         // driver.quit();
-      //}
+            if (driver.findElement(By.id("search_list_section")).findElements(By.className("lot")).size() == 0) {
+                throw new NoSuchElementException("Don't work");
+            }
+        } catch (NoSuchElementException e) {
+            System.out.println("Don't work");
+        } finally {
+            driver.quit();
+      }
     }
 }

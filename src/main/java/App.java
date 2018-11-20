@@ -2,6 +2,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+
+import java.lang.reflect.Array;
 import java.util.stream.Collectors;
 import java.util.List;
 import org.openqa.selenium.NoSuchElementException;
